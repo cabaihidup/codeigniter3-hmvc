@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+	Options +FollowSymLinks
+	Options -Indexes
+	DirectoryIndex index.html index.php
+
+    RewriteEngine On
+#    RewriteBase /checkin
+
+    RewriteCond $1 !^(index\.php|img|css|js|robots\.txt|favicon\.ico)
+
+    RewriteCond %{REQUEST_URI} ^system.*
+    RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+    RewriteCond %{REQUEST_URI} ^application.*
+    RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
+
+#    SetEnv CI_ENV production
+</IfModule>
